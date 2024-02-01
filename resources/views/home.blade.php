@@ -38,12 +38,31 @@
                     <div class="w-full lg:w-8/12">
                         <div class="flex items-center justify-between ">
                             <h1 class="text-xl font-bold text-gray-700 md:text-2xl">Post</h1>
-                            <div>
-                                <select class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                    <option>Latest</option>
-                                    <option>Last Week</option>
-                                </select>
-                            </div>
+                          <x-dropdown>
+                              <x-slot name="trigger">
+                                  <button @click="show = !show"
+                                          class="flex-1 appearance-none bg-transparent py-2 pl-3 pr-9 text-sm font-semibold focus:outline-none">
+                                      <span class="mr-2">Date</span>
+{{--                                       <x-icon name="down-arrow" class="absolute pointer-events-none"/> --}}
+                                  </button>
+                              </x-slot>
+                              <x-dropdown-item href="/?sort=oldest">Oldest</x-dropdown-item>
+                              <x-dropdown-item href="/?sort=newest">Newest</x-dropdown-item>
+                          </x-dropdown>
+                            <x-dropdown>
+                                <x-slot name="trigger">
+                                    <button @click="show = !show"
+                                            class="flex-1 appearance-none bg-transparent py-2 pl-3 pr-9 text-sm font-semibold focus:outline-none">
+                                        <span class="mr-2">destination</span>
+                                    </button>
+                                </x-slot>
+                                @foreach($continents as $continent)
+                                    <x-dropdown-item href="/?destination={{$continent->nameContinent}}">{{$continent->nameContinent}}</x-dropdown-item>
+                                @endforeach
+
+                            </x-dropdown>
+
+
                         </div>
                         @foreach($aventures as $aventure)
                         <div class="mt-6">
@@ -54,7 +73,7 @@
                                 <div class="mt-2"><a href="#" class="text-2xl font-bold text-gray-700 hover:underline">{{$aventure->titre}}</a>
                                     <p class="mt-2 text-gray-600">{{$aventure->aventureDescription}}</p>
                                     <p class="mt-2 text-gray-600">{!! mb_strimwidth($aventure->consiel, 0, 100, '...') !!}</p>
-                                    <p>{{$continent->nameContinent}}</p>
+                                    <p>{{$aventure->continent->nameContinent}}</p>
                                 </div>
                                 <div class="flex items-center justify-between mt-4"><a href="{{route('aventure.single',$aventure->id)}}"
                                                                                        class="text-blue-500 hover:underline">Read more</a>

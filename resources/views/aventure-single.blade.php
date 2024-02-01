@@ -25,7 +25,7 @@
 			c0-11.797,9.536-21.333,21.333-21.333s21.333,9.536,21.333,21.333V256z" />
                         </g>
                     </g>
-                </svg>  
+                </svg>
                 <span class="ml-1">{{$aventure->created_at->diffForHumans()}}</span></span>
             <a href="#" class="flex flex-row items-center hover:text-indigo-600  mr-3">
                 <svg class="text-indigo-600" fill="currentColor" height="16px" aria-hidden="true" role="img" focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

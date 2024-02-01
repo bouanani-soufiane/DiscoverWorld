@@ -15,11 +15,14 @@ class AventureController extends Controller
      */
     public function index()
     {
-        $id = 2;
+    if(request('destination')){
+        dd(request('destination'));
+    }
+        $continents = Continent::all();
+        $aventures = Aventure::filter(request(["search", "destination", "sort"]))->get();
 
-        $aventures = Aventure::with('images')->get();
 
-        return view('aventures', compact('aventures'));
+        return view('aventures', compact('aventures','continents'));
     }
     public function showSingle($id)
     {
