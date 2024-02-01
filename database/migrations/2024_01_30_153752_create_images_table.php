@@ -12,22 +12,23 @@ return new class extends Migration
     public function up(): void
     {
         Schema::disableForeignKeyConstraints();
-
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('images', function (Blueprint $table) {
             $table->id();
-            $table->string('username');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->foreignId('image_id')
+            $table->string('text');
+            $table->foreignId('aventure_id')
                 ->nullable()
-                ->constrained('images')
+                ->constrained('aventures')
                 ->unique()
                 ->onUpdate('restrict')
                 ->onDelete('restrict');
-            $table->rememberToken();
+            $table->foreignId('continent_id')
+                ->nullable()
+                ->constrained('continents')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
             $table->timestamps();
         });
+        Schema::enableForeignKeyConstraints();
     }
 
     /**
@@ -35,6 +36,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('images');
     }
 };
