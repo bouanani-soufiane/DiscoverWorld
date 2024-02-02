@@ -31,7 +31,7 @@
                                 <p class="text-gray-600">{!! mb_strimwidth($aventure->consiel, 0, 100, '...') !!}</p>
                                 <p class="text-gray-600">{{$aventure->user->username}}</p>
                             </div>
-                            <a href="https://tailus.io" class="block w-max text-cyan-600">Read more</a>
+                            <a href="{{route('aventure.single',$aventure->id)}}" class="block w-max text-cyan-600">Read more</a>
                         </div>
                     </div>
                 </div>

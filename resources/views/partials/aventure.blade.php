@@ -42,7 +42,7 @@
                         </div>
                         <div class="mb-8">
                             <label class="text-xl text-gray-600 mb-2">choose images</label></br>
-                            <input type="file" class="border-2 border-gray-300 p-2 w-full" name="images[]" multiple id="description" >
+                                <input type="file" class="border-2 border-gray-300 p-2 w-full" name="images[]" multiple id="description" >
                         </div>
 
                         <div class="flex p-1">

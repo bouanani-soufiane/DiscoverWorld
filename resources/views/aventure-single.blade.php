@@ -2,14 +2,23 @@
 
 <div class="max-w-screen-lg mx-auto p-5 sm:p-10 md:p-16">
 
+    <style>
+
+        .flex-img {
+            width: 200px; /* Set the width to 200px */
+            height: auto; /* Maintain aspect ratio */
+            margin: 5px; /* Add margin for spacing between images */
+        }
+    </style>
 
     <div class="mb-10 rounded overflow-hidden flex flex-col mx-auto text-center">
         <a href="#" class="max-w-3xl mx-auto space-y-4 text-xl sm:text-5xl mb-6 font-semibold inline-block hover:text-indigo-600 transition duration-500 ease-in-out inline-block mb-6">{{$aventure->titre}}</a>
-        <a href="#" class="">
-                @foreach($aventure->images as $img)
-                    <img class="" src="{{ asset('storage/' . $img->text) }}" alt="Sunset in the mountains">
-                @endforeach
-            </a>
+        <div class="flex">
+            @foreach($aventure->images as $img)
+                <img class="flex-img" src="{{ asset('storage/' . $img->text) }}" alt="Sunset in the mountains">
+            @endforeach
+        </div>
+
         <a href="#" class="max-w-3xl mx-auto text-xl sm:text-2xl font-semibold inline-block hover:text-indigo-600 transition duration-500 ease-in-out inline-block mb-6">{{$aventure->aventureDescription}}</a>
 
         <p class="text-gray-700 text-base leading-8 max-w-2xl mx-auto mb-4">

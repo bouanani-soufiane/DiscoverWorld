@@ -38,17 +38,17 @@
                     <div class="w-full lg:w-8/12">
                         <div class="flex items-center justify-between ">
                             <h1 class="text-xl font-bold text-gray-700 md:text-2xl">Post</h1>
-                          <x-dropdown>
-                              <x-slot name="trigger">
-                                  <button @click="show = !show"
-                                          class="flex-1 appearance-none bg-transparent py-2 pl-3 pr-9 text-sm font-semibold focus:outline-none">
-                                      <span class="mr-2">Date</span>
-{{--                                       <x-icon name="down-arrow" class="absolute pointer-events-none"/> --}}
-                                  </button>
-                              </x-slot>
-                              <x-dropdown-item href="/?sort=oldest">Oldest</x-dropdown-item>
-                              <x-dropdown-item href="/?sort=newest">Newest</x-dropdown-item>
-                          </x-dropdown>
+                            <x-dropdown>
+                                <x-slot name="trigger">
+                                    <button @click="show = !show"
+                                            class="flex-1 appearance-none bg-transparent py-2 pl-3 pr-9 text-sm font-semibold focus:outline-none">
+                                        <span class="mr-2">Date</span>
+                                    </button>
+                                </x-slot>
+                                <x-dropdown-item href="/?sort=oldest">Oldest</x-dropdown-item>
+                                <x-dropdown-item href="/?sort=newest">Newest</x-dropdown-item>
+                            </x-dropdown>
+
                             <x-dropdown>
                                 <x-slot name="trigger">
                                     <button @click="show = !show"
@@ -87,22 +87,32 @@
                         </div>
                         @endforeach
 
-
                     {{ $aventures->links() }}
                     </div>
                     <div class="hidden w-4/12 -mx-8 lg:block">
                         <div class="px-8">
                             <h1 class="mb-4 text-xl font-bold text-gray-700">le nombre total d'aventures</h1>
                             <div class="flex flex-col max-w-sm px-6 py-4 mx-auto bg-white rounded-lg shadow-md">
-                                100
+                                Total Aventures: {{ $aventures->count() }}
                             </div>
                         </div>
                         <div class="px-8 mt-10">
                             <h1 class="mb-4 text-xl font-bold text-gray-700">les destinations les plus populaires</h1>
                             <div class="flex flex-col max-w-sm px-4 py-6 mx-auto bg-white rounded-lg shadow-md">
                                 <ul>
-                                    <li><a href="#" class="mx-1 font-bold text-gray-700 hover:text-gray-600 hover:underline">-
-                                            AWS</a></li>
+                                    <li>
+                                        <a href="#" class="mx-1 font-bold text-gray-700 hover:text-gray-600 hover:underline">-
+                                            @if ($continentWithMostAdventures)
+                                                    Continent with Most Adventures: {{ $continentWithMostAdventures->nameContinent }}
+                                            @endif
+                                        </a>
+                                        <br>
+                                        <a href="#" class="mx-1 font-bold text-gray-700 hover:text-gray-600 hover:underline">-
+                                            @if ($continentWithMostAdventures)
+                                                Adventure Count: {{ $continentWithMostAdventures->adventure_count }}
+                                            @endif
+                                        </a>
+                                    </li>
 
                                 </ul>
                             </div>
@@ -110,7 +120,7 @@
                         <div class="px-8 mt-10">
                             <h1 class="mb-4 text-xl font-bold text-gray-700">nombre d'utilisateurs actifs</h1>
                             <div class="flex flex-col max-w-sm px-8 py-6 mx-auto bg-white rounded-lg shadow-md">
-
+                                Total users  : {{$usersCount}}
                             </div>
                         </div>
                     </div>
