@@ -33,38 +33,42 @@
             </div>
         </div>
         <div class="overflow-x-hidden bg-gray-100">
+            <h1 class="text-center p-7 mb-8 mt-8 bold" style="font-size: 50px;">See All Adventure</h1>
             <div class="px-6 py-8">
                 <div class="container flex justify-between mx-auto">
                     <div class="w-full lg:w-8/12">
-                        <div class="flex items-center justify-between ">
-                            <h1 class="text-xl font-bold text-gray-700 md:text-2xl">Post</h1>
-                            <x-dropdown>
-                                <x-slot name="trigger">
-                                    <button @click="show = !show"
-                                            class="flex-1 appearance-none bg-transparent py-2 pl-3 pr-9 text-sm font-semibold focus:outline-none">
-                                        <span class="mr-2">Date</span>
-                                    </button>
-                                </x-slot>
-                                <x-dropdown-item href="/?sort=oldest">Oldest</x-dropdown-item>
-                                <x-dropdown-item href="/?sort=newest">Newest</x-dropdown-item>
-                            </x-dropdown>
+                        <div class="flex items-center justify-center ">
 
-                            <x-dropdown>
-                                <x-slot name="trigger">
-                                    <button @click="show = !show"
-                                            class="flex-1 appearance-none bg-transparent py-2 pl-3 pr-9 text-sm font-semibold focus:outline-none">
-                                        <span class="mr-2">destination</span>
-                                    </button>
-                                </x-slot>
-                                @foreach($continents as $continent)
-                                    <x-dropdown-item href="/?destination={{$continent->nameContinent}}">{{$continent->nameContinent}}</x-dropdown-item>
-                                @endforeach
+                            {{-- filter adventure --}}
+                            <form action="{{ route('home') }}" method="get" class="mt-4">
+                                <div class="flex justify-around">
+                                    <div class="flex justify-around ">
+                                        <label for="sort" class=" p-2 text-lg font-semibold text-gray-700">Sort By:</label>
+                                        <select id="sort" name="sort" class="block ml-3 mt-1 p-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200">
+                                            <option disabled selected>Filter by Time</option>
+                                            <option value="oldest">Oldest</option>
+                                            <option value="newest">Newest</option>
+                                        </select>
+                                    </div>
+                                    <div  class="flex justify-around space-x-4 ">
+                                        <label for="country" class=" p-2 text-lg font-semibold text-gray-700 ml-4">Filter By Country:</label>
+                                        <select id="country" name="country" class="block ml-1 p-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200">
+                                            <option value="">All Countries</option>
+                                            @foreach ($continents as $country)
+                                                <option value="{{ $country->nameContinent }}">{{ $country->nameContinent }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="mx-auto max-w-sm mt-4">
+                                    <button type="submit" class="p-2 w-full border border-blue-800   bg-blue-700 text-white rounded-md hover:bg-white hover:text-blue-700 transition duration-300 ease-in-out">Apply</button>
+                                </div>
+                            </form>
 
-                            </x-dropdown>
 
 
                         </div>
-                        @foreach($aventures as $aventure)
+                        @foreach($adventures as $aventure)
                         <div class="mt-6">
                             <div class="max-w-4xl px-10 py-6 mx-auto bg-white rounded-lg shadow-md">
                                 <div class="flex items-center justify-between"><span class="font-light text-gray-600">{{$aventure->created_at->format('j F Y')}}</span><a href="#"
@@ -87,13 +91,12 @@
                         </div>
                         @endforeach
 
-                    {{ $aventures->links() }}
                     </div>
                     <div class="hidden w-4/12 -mx-8 lg:block">
                         <div class="px-8">
                             <h1 class="mb-4 text-xl font-bold text-gray-700">le nombre total d'aventures</h1>
                             <div class="flex flex-col max-w-sm px-6 py-4 mx-auto bg-white rounded-lg shadow-md">
-                                Total Aventures: {{ $aventures->count() }}
+                                Total Aventures: {{ $adventures->count() }}
                             </div>
                         </div>
                         <div class="px-8 mt-10">

@@ -13,11 +13,12 @@
 
     <div class="mb-10 rounded overflow-hidden flex flex-col mx-auto text-center">
         <a href="#" class="max-w-3xl mx-auto space-y-4 text-xl sm:text-5xl mb-6 font-semibold inline-block hover:text-indigo-600 transition duration-500 ease-in-out inline-block mb-6">{{$aventure->titre}}</a>
-        <div class="flex">
+        <div class="flex justify-center items-center">
             @foreach($aventure->images as $img)
                 <img class="flex-img" src="{{ asset('storage/' . $img->text) }}" alt="Sunset in the mountains">
             @endforeach
         </div>
+
 
         <a href="#" class="max-w-3xl mx-auto text-xl sm:text-2xl font-semibold inline-block hover:text-indigo-600 transition duration-500 ease-in-out inline-block mb-6">{{$aventure->aventureDescription}}</a>
 
