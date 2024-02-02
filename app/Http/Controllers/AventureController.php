@@ -7,6 +7,7 @@ use App\Models\Continent;
 use App\Models\Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 
 class AventureController extends Controller
 {
@@ -15,14 +16,19 @@ class AventureController extends Controller
      */
     public function index()
     {
-    if(request('destination')){
-        dd(request('destination'));
-    }
-        $continents = Continent::all();
-        $aventures = Aventure::filter(request(["search", "destination", "sort"]))->get();
+        $continents = Cache::remember('continents', now()->addHours(1), function () {
+            return Continent::all();
+        });
 
+        $aventures = Cache::remember(
+            'aventures_' . implode('_', request(['search', 'destination', 'sort'])),
+            now()->addMinutes(10),
+            function () {
+                return Aventure::filter(request(['search', 'destination', 'sort']))->get();
+            }
+        );
 
-        return view('aventures', compact('aventures','continents'));
+        return view('aventures', compact('aventures', 'continents'));
     }
     public function showSingle($id)
     {
